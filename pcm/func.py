@@ -227,13 +227,18 @@ def _code(fork, branch, app_id):
     if not os.path.isdir(update_root):
         os.mkdir(update_root)
 
+    clone = True
     if os.path.isdir(ppath):
-        if util.yes("Pychron source code already exists. Remove and re-clone"):
+        clone = False
+        if util.yes(
+            "Pychron source code already exists. Remove and re-clone [y]/n"
+        ):
             shutil.rmtree(ppath)
+            clone = True
 
-    url = f"https://github.com/{fork}/pychron.git"
-
-    subprocess.call([git, "clone", url, f"--branch={branch}", ppath])
+    if clone:
+        url = f"https://github.com/{fork}/pychron.git"
+        subprocess.call([git, "clone", url, f"--branch={branch}", ppath])
     subprocess.call([git, "status"], cwd=ppath)
 
 
