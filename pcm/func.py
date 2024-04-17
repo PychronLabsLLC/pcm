@@ -230,9 +230,7 @@ def _code(fork, branch, app_id):
     clone = True
     if os.path.isdir(ppath):
         clone = False
-        if util.yes(
-            "Pychron source code already exists. Remove and re-clone [y]/n"
-        ):
+        if util.yes("Pychron source code already exists. Remove and re-clone [y]/n"):
             shutil.rmtree(ppath)
             clone = True
 
