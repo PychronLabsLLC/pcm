@@ -11,7 +11,7 @@ It can also be used to install the pychron source code, build the necessary pyth
 scripts
 
 # Prerequisites
-1. Install [Enthought Deployment Manager](https://assets.enthought.com/downloads/edm/?_ga=2.140098611.1251917361.1656174688-1854424385.1656174688)
+1. Install [Miniconda](https://docs.anaconda.com/miniconda/miniconda-install/)
 2. Install git
    1. for windows download from [git-scm.com](https://git-scm.com/download/win) 
    2. for mac use 
