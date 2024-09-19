@@ -183,13 +183,16 @@ def _scripts(env, use_ngx, overwrite, verbose):
 def _pipeline_defaults(env, overwrite):
     root = os.path.join(HOME, env)
 
-    for kind, templates in (('ideogram', ('Default.json', )),
-                            ('spectrum', ('Default.json', )),
-                            ):
-        util.make_dir(root, '.appdata', 'plotter_options', 'root', kind)
+    for kind, templates in (
+        ("ideogram", ("Default.json",)),
+        ("spectrum", ("Default.json",)),
+    ):
+        util.make_dir(root, ".appdata", "plotter_options", "root", kind)
         for template in templates:
             txt = render.render_template(template, template_root=kind)
-            p = os.path.join(root, '.appdata', 'plotter_options', 'root', kind, template)
+            p = os.path.join(
+                root, ".appdata", "plotter_options", "root", kind, template
+            )
             util.write(p, txt, overwrite=overwrite)
 
 

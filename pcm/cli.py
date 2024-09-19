@@ -33,7 +33,7 @@ from pcm.func import (
     _fetch,
     _conda,
     _req,
-    _pipeline_defaults
+    _pipeline_defaults,
 )
 from pcm.util import echo_config, yes
 
@@ -103,7 +103,9 @@ def device(template, name):
     "--use_login/--no-use_login", default=True, help="Write default login files"
 )
 @click.option(
-    "--use_pipeline_defaults/--no-use_pipeline_defaults", default=True, help="Write default pipeline defaults"
+    "--use_pipeline_defaults/--no-use_pipeline_defaults",
+    default=True,
+    help="Write default pipeline defaults",
 )
 @click.option("--login/--no-login", default=0, help="show login window at startup")
 @click.option(
