@@ -41,8 +41,8 @@ def r_mkdir(p, *args):
     return p
 
 
-def make_dir(root, name):
-    for d in (root, os.path.join(root, name)):
+def make_dir(root, *name):
+    for d in (root, os.path.join(root, *name)):
         if not os.path.isdir(d):
             os.mkdir(d)
 

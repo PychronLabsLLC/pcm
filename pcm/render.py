@@ -18,9 +18,14 @@ import os
 import click
 
 
-def render_template(template_name, **ctx):
+def render_template(template_name, template_root=None, **ctx):
     root = os.path.abspath(os.path.dirname(__file__))
-    p = os.path.join(root, "templates", f"{template_name}.template")
+
+    if template_root:
+        p = os.path.join(root, "templates", template_root, f"{template_name}.template")
+    else:
+        p = os.path.join(root, "templates", f"{template_name}.template")
+
     if os.path.isfile(p):
         with open(p, "r") as rfile:
             txt = rfile.read()

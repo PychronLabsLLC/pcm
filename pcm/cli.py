@@ -33,6 +33,7 @@ from pcm.func import (
     _fetch,
     _conda,
     _req,
+    _pipeline_defaults
 )
 from pcm.util import echo_config, yes
 
@@ -101,6 +102,9 @@ def device(template, name):
 @click.option(
     "--use_login/--no-use_login", default=True, help="Write default login files"
 )
+@click.option(
+    "--use_pipeline_defaults/--no-use_pipeline_defaults", default=True, help="Write default pipeline defaults"
+)
 @click.option("--login/--no-login", default=0, help="show login window at startup")
 @click.option(
     "--massspec_db_version", "msv", default=16, help="massspec database version"
@@ -126,6 +130,7 @@ def wizard(
     environment,
     use_launcher,
     use_login,
+    use_pipeline_defaults,
     login,
     msv,
     overwrite,
@@ -148,6 +153,7 @@ def wizard(
         python_environment=environment,
         install_launcher=use_launcher,
         write_login_defaults=use_login,
+        install_pipeline_defaults=use_pipeline_defaults,
         show_login_at_startup=login,
         massspec_version=msv,
         overwrite=overwrite,
@@ -164,6 +170,7 @@ def wizard(
         (use_src, _code, (fork, branch, app_id)),
         (use_init, _init, (env, org, data_org, use_ngx, overwrite, verbose)),
         (use_setupfiles, _setupfiles, (env, use_ngx, overwrite, verbose)),
+        (use_pipeline_defaults, _pipeline_defaults, (env, overwrite)),
         (conda, _conda, (environment, app, verbose)),
         (
             use_launcher,
@@ -192,27 +199,14 @@ def wizard(
 
                 traceback.print_exc()
 
-    # if use_src:
-    #     _code(fork, branch, app_id)
 
-    # if use_init:
-    #     _init(env, org, use_ngx, overwrite, verbose)
-
-    # if use_setupfiles:
-    #     _setupfiles(env, use_ngx, overwrite, verbose)
-
-    # if conda:
-    #     _conda(env, app, overwrite, verbose)
-    # if use_edm:
-    #     _edm(environment, app, verbose)
-
-    # if use_launcher:
-    #     _launcher(
-    #         conda, environment, app, fork, app_id, login, msv, None, overwrite, verbose
-    #     )
-
-    # if use_login:
-    #     _login(env, app_id)
+@cli.command()
+@click.option("--env", default="Pychron", help="Environment, aka root directory name")
+@click.option(
+    "--overwrite/--no-overwrite", default=False, help="Overwrite the file if it exists"
+)
+def pipeline_defaults(env, overwrite):
+    _pipeline_defaults(env, overwrite)
 
 
 @cli.command()
